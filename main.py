@@ -4,15 +4,11 @@ from BinarySearchTree import BinarySearchTree
 from Node import Node
 from PrintTree import pretty_tree
 
-# tree = BinarySearchTree()
-# random = [3, 10, 7, 2, 8, 4, 9, 5, 1, 6]
-# sorted = [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31]
-# reverse_sorted = [34, 25, 22, 18, 15, 11, 9, 7, 3, 1]
-#
-# for data in random:
-#     tree.insert(Node(data))
-#
-# print(pretty_tree(tree), tree.height(tree.root))
+# TODO: Do this thing
+# FIXME: Fix this bug
+# BUG: Bug
+# HACK: Whatever this means
+# XXX: This code is already problematic
 
 
 def readfile(tree, previously_read):
