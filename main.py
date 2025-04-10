@@ -1,4 +1,5 @@
 import os
+import random
 
 from BinarySearchTree import BinarySearchTree
 from Node import Node
@@ -65,7 +66,7 @@ def readfile(tree, previously_read):
         return
 
     for value in data:
-        tree.insert(Node(value))
+        tree.insert(Node(value, random.random()))
     previously_read.append(file_value)
     print("File Read Successfully. ")
     input("Press enter to continue. ")
@@ -106,7 +107,7 @@ while running:
                 except:
                     pass
                 try:
-                    tree.insert(Node(value))
+                    tree.insert(Node(value, random.random()))
                     break
                 except Exception as e:
                     print(f"An error has occured: ", e)

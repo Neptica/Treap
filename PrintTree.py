@@ -4,7 +4,7 @@ def _pretty_tree_helper(root, curr_index=0):
 
     line1 = []
     line2 = []
-    node_repr = str(root.key)
+    node_repr = str(root.key) + ":" + str(root.priority)
 
     new_root_width = gap_size = len(node_repr)
 
