@@ -66,7 +66,12 @@ def readfile(tree, previously_read):
         return
 
     for value in data:
-        tree.insert(Node(value, random.random()))
+        try:
+            tree.insert(Node(value, random.random()))
+            print("Inserted value:", value)
+        except Exception as e:
+            print("Ignoring duplicate:", value)
+
     previously_read.append(file_value)
     print("File Read Successfully. ")
     input("Press enter to continue. ")
