@@ -44,55 +44,30 @@ class BinarySearchTree:
         self.count += 1
         self.percolate_up(node)
 
-    # TODO: Update remove function to percolate out of the Treap
     def remove(self, key):
-        parent = None
         current_node = self.root
 
-        while current_node is not None:
+        while current_node:
 
             if current_node.key == key:
-                # Key found, removal in progress
-                self.count -= 1
-                if current_node.left is None and current_node.right is None:
-                    if parent is None:
-                        self.root = None
-                    elif parent.left is current_node:
-                        parent.left = None
-                    else:
-                        parent.right = None
-                    return
-                elif current_node.left is not None and current_node.right is None:
-                    if parent is None:
-                        self.root = current_node.left
-                    elif parent.left is current_node:
-                        parent.left = current_node.left
-                    else:
-                        parent.right = current_node.left
-                    return
-                elif current_node.left is None and current_node.right is not None:
-                    if parent is None:
-                        self.root = current_node.right
-                    elif parent.left is current_node:
-                        parent.left = current_node.right
-                    else:
-                        parent.right = current_node.right
-                    return
-                else:
-                    successor = current_node.right
-                    while successor.left is not None:
-                        successor = successor.left
-                    current_node.key = successor.key
-                    parent = current_node
-                    current_node = current_node.right
-                    key = parent.key
-                    self.count += 1
-            elif current_node.key < key:
-                parent = current_node
+                current_node.priority = float("-inf")
+                break
+            elif key > current_node.key:
                 current_node = current_node.right
             else:
-                parent = current_node
                 current_node = current_node.left
+
+        if current_node:
+            self.percolate_down(current_node)
+            # Disconnect the node from the tree after making it a leaf node
+            if current_node.parent:
+                if current_node.parent.right == current_node:
+                    current_node.parent.right = None
+                else:
+                    current_node.parent.left = None
+            else:
+                # Node is root and leaf node, thus the only node in the tree
+                self.root = None
 
         return
 
@@ -131,6 +106,18 @@ class BinarySearchTree:
                 parent = node.parent
             else:
                 break
+
+    def percolate_down(self, node):
+        while node.left or node.right:
+            if node.left and node.right:
+                if node.left.priority < node.right.priority:
+                    self.rotate_left(node)
+                else:
+                    self.rotate_right(node)
+            elif node.left:
+                self.rotate_right(node)
+            else:
+                self.rotate_left(node)
 
     def rotate_right(self, node):
         parent = node.parent
